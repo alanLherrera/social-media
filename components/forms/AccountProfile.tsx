@@ -14,6 +14,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import * as z from 'zod';
+import  Image  from 'next/image';
 
 interface Props {
   user: {
@@ -44,15 +45,37 @@ const AccountProfile = ({ user, btnTitle }: Props) =>  {
   return(
     <div className="">
        <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form 
+      onSubmit={form.handleSubmit(onSubmit)} 
+      className="flex  flex-col justify-start gap-10">
         <FormField
           control={form.control}
           name="username"
           render={({ field }) => (
-            <FormItem>
-              <FormLabel>Username</FormLabel>
-              <FormControl>
-                <Input placeholder="shadcn" {...field} />
+            <FormItem className="flex items-center gap-4">
+              <FormLabel className="account-form_image-label">{field.value ? (
+                <Image 
+                src={field.value}
+                alt="profile_photo"
+                width={96}
+                height={96}
+                priority
+                className="rounded-full object-contain"/>
+              ) : (
+              <Image 
+              src='/assets/profile.svg'
+              alt="profile_photo"
+              width={24}
+              height={24}
+              className=" object-contain"/>
+            )}
+              </FormLabel>
+              <FormControl className="flex-1 text-base-semibold text-gray-200">
+                <Input 
+                type="file"
+                accept="image/"
+                placeholder="Upload a Photo"
+                className="account-form-image-input" />
               </FormControl>
               <FormDescription>
                 This is your public display name.
