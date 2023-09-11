@@ -15,6 +15,7 @@ import {
 } from '@/components/ui/form';
 import * as z from 'zod';
 import  Image  from 'next/image';
+import { ChangeEvent } from 'react';
 
 interface Props {
   user: {
@@ -39,18 +40,22 @@ const AccountProfile = ({ user, btnTitle }: Props) =>  {
       bio: '',
     }
   })
+
+  const handleImage = (e: ChangeEvent, fieldChange: (value: string) => void ) => {
+    e.preventDefault();
+  }
   function onSubmit(values: z.infer<typeof UserValidation>) {
     console.log(values);
   }
   return(
-    <div className="">
+    
        <Form {...form}>
       <form 
       onSubmit={form.handleSubmit(onSubmit)} 
       className="flex  flex-col justify-start gap-10">
         <FormField
           control={form.control}
-          name="username"
+          name="profile_photo"
           render={({ field }) => (
             <FormItem className="flex items-center gap-4">
               <FormLabel className="account-form_image-label">{field.value ? (
@@ -74,8 +79,10 @@ const AccountProfile = ({ user, btnTitle }: Props) =>  {
                 <Input 
                 type="file"
                 accept="image/"
-                placeholder="Upload a Photo"
-                className="account-form-image-input" />
+                placeholder="Upload your Profile Photo!"
+                className="account-form-image-input" 
+                onChange={(e) => handleImage(e, field.onChange)}
+                />
               </FormControl>
               <FormDescription>
                 This is your public display name.
@@ -87,7 +94,7 @@ const AccountProfile = ({ user, btnTitle }: Props) =>  {
         <Button type="submit">Submit</Button>
       </form>
     </Form>
-    </div>
+    
   )
 }
 
