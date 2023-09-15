@@ -6,12 +6,10 @@ import { zodResolver }  from '@hookform/resolvers/zod';
 import { UserValidation } from '@/lib/validations/user';
 import {
   Form,
-  FormControl,
-  FormDescription,
+  FormControl, 
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,
 } from '@/components/ui/form';
 import * as z from 'zod';
 import  Image  from 'next/image';
@@ -145,7 +143,7 @@ const AccountProfile = ({ user, btnTitle }: Props) =>  {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button type="submit" className="bg-primary-500">Submit</Button>
       </form>
     </Form>
     
