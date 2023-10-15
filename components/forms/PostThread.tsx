@@ -13,7 +13,6 @@ import {
 } from "@/components/ui/form";
 import * as z from "zod";
 import { Textarea } from "../ui/textarea";
-
 //import { updateUser } from "@/lib/actions/user.actions";
 import { usePathname, useRouter } from "next/navigation";
 
@@ -29,7 +28,9 @@ interface Props {
   btnTitle: string;
 }
 
-const onSubmit = () => {};
+const onSubmit = async () => {
+  //await createThread()
+};
 
 function PostThread({ userId }: { userId: string }) {
   const router = useRouter();
@@ -63,6 +64,10 @@ function PostThread({ userId }: { userId: string }) {
             </FormItem>
           )}
         />
+
+        <Button type="submit" className="bg-primary-50">
+          Post
+        </Button>
       </form>
     </Form>
   );

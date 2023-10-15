@@ -1,28 +1,27 @@
-import { ClerkProvider } from "@clerk/nextjs"
-import { Inter } from "next/font/google"
+import { ClerkProvider } from "@clerk/nextjs";
+import { Inter } from "next/font/google";
 
 import "../globals.css";
 
 export const metadata = {
-  title : 'Threads',
-  description : 'a next.js meta threads app'
-}
+  title: "Threads",
+  description: "a next.js meta threads app",
+};
 
-const inter = Inter({ subsets: ["latin"] })
-
+const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({
-  children
+  children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <ClerkProvider>
-      <html lang='eng'>
+      <html lang="eng">
         <body className={`${inter.className} bg-dark-1`}>
-            {children}
+          <div className="flex justify-center mt-20">{children}</div>
         </body>
       </html>
-    </ClerkProvider> 
-  )
+    </ClerkProvider>
+  );
 }
