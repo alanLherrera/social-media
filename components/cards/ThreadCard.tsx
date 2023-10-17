@@ -57,10 +57,11 @@ const ThreadCard = ({
                 {author.name}
               </h4>
             </Link>
+
+            <p className="mt-2 text-small-regular text-light-2">{content}</p>
           </div>
         </div>
       </div>
-      <h2 className="text-small-regular text-light-2">{content}</h2>
     </article>
   );
 };
