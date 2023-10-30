@@ -1,3 +1,4 @@
+//
 import { fetchPosts } from "@/lib/actions/thread.actions";
 import { currentUser } from "@clerk/nextjs";
 import ThreadCard from "@/components/cards/ThreadCard";
@@ -7,7 +8,7 @@ export default async function Home() {
   const user = await currentUser();
   if (!user) return null;
   //testing to see if it would fetch post
-  //console.log(result);
+  console.log(result);
   return (
     <>
       <h1 className="head-text text-center">Home</h1>
