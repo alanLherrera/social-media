@@ -12,19 +12,21 @@ export default async function Page({ params }: { params: { id: string } }) {
   const userInfo = await fetchUser(user.id);
   if(!userInfo?.onboarded) redirect('/onboarding');
 
+  const thread = await fetchThreadById(params.id);
+
   return(
   <section className="relative">
     <div>
       <ThreadCard
-        key={post._id}
-        id={post._id}
+        key={thread._id}
+        id={thread._id}
         currentUserId={user?.id}
-        parentId={post.parentIds}
-        content={post.text}
-        author={post.author}
-        community={post.community}
-        createdAt={post.createdAt}
-        comments={post.comments}
+        parentId={thread.parentIds}
+        content={thread.text}
+        author={thread.author}
+        community={thread.community}
+        createdAt={thread.createdAt}
+        comments={thread.comments}
       />
     </div>
   </section>;
