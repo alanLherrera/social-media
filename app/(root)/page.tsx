@@ -1,14 +1,17 @@
-//
 import { fetchPosts } from "@/lib/actions/thread.actions";
 import { currentUser } from "@clerk/nextjs";
 import ThreadCard from "@/components/cards/ThreadCard";
+import { fetchUser } from "@/lib/actions/user.actions";
+import { redirect } from "next/navigation";
 
 export default async function Home() {
   const result = await fetchPosts(1, 30);
   const user = await currentUser();
   if (!user) return null;
-  //testing to see if it would fetch post
-  console.log(result);
+
+  const userInfo = await fetchUser(user.id);
+  if (!userInfo?.onboarded) redirect("/onboarding");
+
   return (
     <>
       <h1 className="head-text text-center">Home</h1>
@@ -27,7 +30,7 @@ export default async function Home() {
                 author={post.author}
                 community={post.community}
                 createdAt={post.createdAt}
-                comments={post.comments}
+                comments={post.children}
               />
             ))}
           </>

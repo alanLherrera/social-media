@@ -69,13 +69,15 @@ const ThreadCard = ({
                   height={24}
                   className="cursor-pointer object-container"
                 />
-                <Image
-                  src="/assets/reply.svg"
-                  alt="reply"
-                  width={24}
-                  height={24}
-                  className="cursor-pointer object-container"
-                />
+                <Link href={`/thread/${id}`}>
+                  <Image
+                    src="/assets/reply.svg"
+                    alt="reply"
+                    width={24}
+                    height={24}
+                    className="cursor-pointer object-container"
+                  />
+                </Link>
                 <Image
                   src="/assets/repost.svg"
                   alt="repost"
