@@ -1,9 +1,11 @@
 "use client";
 
-import * as z from "zod";
+import { z } from "zod";
+import Image from "next/image";
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { usePathname, useRouter } from "next/navigation";
+import { zodResolver } from "@hookform/resolvers/zod";
+
 import {
   Form,
   FormControl,
@@ -11,11 +13,11 @@ import {
   FormItem,
   FormLabel,
 } from "@/components/ui/form";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+
+import { Input } from "../ui/input";
+import { Button } from "../ui/button";
 
 import { CommentValidation } from "@/lib/validations/thread";
-import Image from "next/image";
 import { addCommentToThread } from "@/lib/actions/thread.actions";
 
 interface Props {
@@ -24,15 +26,9 @@ interface Props {
   currentUserId: string;
 }
 
-export default function Comment({
-  threadId,
-  currentUserImg,
-  currentUserId,
-}: Props) {
-  //const router = useRouter();
+function Comment({ threadId, currentUserImg, currentUserId }: Props) {
   const pathname = usePathname();
-
-  //const { organization } = useOrganization();
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof CommentValidation>>({
     resolver: zodResolver(CommentValidation),
@@ -54,7 +50,7 @@ export default function Comment({
 
   return (
     <Form {...form}>
-      <form className="comment-form" onSubmit={form.handleSubmit(onSubmit)}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="comment-form">
         <FormField
           control={form.control}
           name="thread"
@@ -88,3 +84,5 @@ export default function Comment({
     </Form>
   );
 }
+
+export default Comment;
