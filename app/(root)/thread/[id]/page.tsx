@@ -5,6 +5,8 @@ import { redirect } from "next/navigation";
 import { fetchThreadById } from "@/lib/actions/thread.actions";
 import Comment from "@/components/forms/Comment";
 
+export const revalidate = 0;
+
 export default async function Page({ params }: { params: { id: string } }) {
   if (!params.id) return null;
 
@@ -38,6 +40,23 @@ export default async function Page({ params }: { params: { id: string } }) {
           currentUserImg={user.imageUrl}
           currentUserId={JSON.stringify(userInfo._id)}
         />
+      </div>
+
+      <div className="mt-10">
+        {thread.children.map((childrenItem: any) => (
+          <ThreadCard
+            key={childrenItem._id}
+            id={childrenItem._id}
+            currentUserId={childrenItem?.id}
+            parentId={childrenItem.parentIds}
+            content={childrenItem.text}
+            author={childrenItem.author}
+            community={childrenItem.community}
+            createdAt={childrenItem.createdAt}
+            comments={childrenItem.comments}
+            isComment
+          />
+        ))}
       </div>
     </section>
   );
