@@ -129,9 +129,20 @@ export async function getActivity(userId: string) {
     // find all of the threads created by this current user
     const userThreads = await Thread.find({ author: userId });
     //collect all the child thread ids (replies) from the 'Children'
-    const childThreads = userThreads.reduce((acc, userThread) => {
-      return acc.cocat(userThread.children);
+    const childThreadIds = userThreads.reduce((acc, userThread) => {
+      return acc.concat(userThread.children);
+    }, []);
+
+    const replies = await Thread.find({
+      _id: { $in: childThreadIds },
+      author: { $ne: userId },
+    }).populate({
+      path: "author",
+      model: User,
+      select: "name image _id",
     });
+
+    return replies;
   } catch (error: any) {
     throw new Error(`Failed to get activity: ${error.message}`);
   }
