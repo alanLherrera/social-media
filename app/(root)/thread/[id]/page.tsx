@@ -30,7 +30,7 @@ export default async function Page({ params }: { params: { id: string } }) {
           author={thread.author}
           community={thread.community}
           createdAt={thread.createdAt}
-          comments={thread.comments}
+          comments={thread.children}
         />
       </div>
 
@@ -53,7 +53,7 @@ export default async function Page({ params }: { params: { id: string } }) {
             author={childrenItem.author}
             community={childrenItem.community}
             createdAt={childrenItem.createdAt}
-            comments={childrenItem.comments}
+            comments={childrenItem.children}
             isComment
           />
         ))}
