@@ -39,6 +39,7 @@ function PostThread({ userId }: Props) {
   });
 
   const onSubmit = async (values: z.infer<typeof ThreadValidation>) => {
+    console.log("ORG:", organization);
     await createThread({
       text: values.thread,
       author: userId,
@@ -72,7 +73,7 @@ function PostThread({ userId }: Props) {
         />
 
         <Button type="submit" className="bg-primary-500">
-          Post
+          Post Thread
         </Button>
       </form>
     </Form>

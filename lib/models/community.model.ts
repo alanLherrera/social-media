@@ -8,7 +8,7 @@ const communitySchema = new mongoose.Schema({
   bio: String,
   createdBy: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "user",
+    ref: "User",
   },
   threads: [
     {
@@ -19,7 +19,7 @@ const communitySchema = new mongoose.Schema({
   members: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "user",
+      ref: "User",
     },
   ],
 });

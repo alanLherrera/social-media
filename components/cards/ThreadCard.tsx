@@ -122,6 +122,7 @@ function ThreadCard({
           isComment={isComment}
         />
       </div>
+
       {!isComment && comments.length > 0 && (
         <div className="ml-1 mt-3 flex items-center gap-2">
           {comments.slice(0, 2).map((comment, index) => (
@@ -149,8 +150,7 @@ function ThreadCard({
           className="mt-5 flex items-center"
         >
           <p className="text-subtle-medium text-gray-1">
-            {formatDateString(createdAt)}
-            {community && ` - ${community.name} Community`}
+            {formatDateString(createdAt)}-{community.name} Community
           </p>
 
           <Image
