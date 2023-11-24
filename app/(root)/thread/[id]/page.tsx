@@ -1,13 +1,15 @@
-import ThreadCard from "@/components/cards/ThreadCard";
-import { fetchUser } from "@/lib/actions/user.actions";
-import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
-import { fetchThreadById } from "@/lib/actions/thread.actions";
+import { currentUser } from "@clerk/nextjs";
+
 import Comment from "@/components/forms/Comment";
+import ThreadCard from "@/components/cards/ThreadCard";
+
+import { fetchUser } from "@/lib/actions/user.actions";
+import { fetchThreadById } from "@/lib/actions/thread.actions";
 
 export const revalidate = 0;
 
-export default async function Page({ params }: { params: { id: string } }) {
+async function page({ params }: { params: { id: string } }) {
   if (!params.id) return null;
 
   const user = await currentUser();
@@ -22,10 +24,9 @@ export default async function Page({ params }: { params: { id: string } }) {
     <section className="relative">
       <div>
         <ThreadCard
-          key={thread._id}
           id={thread._id}
-          currentUserId={user?.id}
-          parentId={thread.parentIds}
+          currentUserId={user.id}
+          parentId={thread.parentId}
           content={thread.text}
           author={thread.author}
           community={thread.community}
@@ -36,24 +37,24 @@ export default async function Page({ params }: { params: { id: string } }) {
 
       <div className="mt-7">
         <Comment
-          threadId={thread.id}
+          threadId={params.id}
           currentUserImg={user.imageUrl}
           currentUserId={JSON.stringify(userInfo._id)}
         />
       </div>
 
       <div className="mt-10">
-        {thread.children.map((childrenItem: any) => (
+        {thread.children.map((childItem: any) => (
           <ThreadCard
-            key={childrenItem._id}
-            id={childrenItem._id}
-            currentUserId={childrenItem?.id}
-            parentId={childrenItem.parentIds}
-            content={childrenItem.text}
-            author={childrenItem.author}
-            community={childrenItem.community}
-            createdAt={childrenItem.createdAt}
-            comments={childrenItem.children}
+            key={childItem._id}
+            id={childItem._id}
+            currentUserId={user.id}
+            parentId={childItem.parentId}
+            content={childItem.text}
+            author={childItem.author}
+            community={childItem.community}
+            createdAt={childItem.createdAt}
+            comments={childItem.children}
             isComment
           />
         ))}
@@ -61,3 +62,5 @@ export default async function Page({ params }: { params: { id: string } }) {
     </section>
   );
 }
+
+export default page;
