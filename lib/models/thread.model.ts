@@ -1,7 +1,10 @@
 import mongoose from "mongoose";
 
 const threadSchema = new mongoose.Schema({
-  text: { type: String, required: true },
+  text: {
+    type: String,
+    required: true,
+  },
   author: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
@@ -11,7 +14,7 @@ const threadSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Community",
   },
-  createAt: {
+  createdAt: {
     type: Date,
     default: Date.now,
   },
@@ -20,7 +23,7 @@ const threadSchema = new mongoose.Schema({
   },
   children: [
     {
-      type: mongoose.Schema.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "Thread",
     },
   ],

@@ -150,7 +150,8 @@ function ThreadCard({
           className="mt-5 flex items-center"
         >
           <p className="text-subtle-medium text-gray-1">
-            {formatDateString(createdAt)}-{community.name} Community
+            {formatDateString(createdAt)}
+            {community && ` - ${community.name} Community`}
           </p>
 
           <Image
